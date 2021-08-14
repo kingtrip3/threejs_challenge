@@ -23,19 +23,36 @@ class App extends Component {
 
     camera.position.z = 5;
 
+    
+
     function handleKeyDown(event) {
       if (event.keyCode === 40) {
         //40 is down arrow
-        window.isBDown = true;
+        window.isDDown = true;
+      } else if (event.keyCode === 38) {
+        //up arrow
+        window.isUDown = true;
+      } else if (event.keyCode === 37) {
+        //37 is left arrow
+        window.isLDown = true;
+      } else if (event.keyCode === 39) {
+        //39 is right arrow
+        window.isRDown = true;
       }
     }
 
     function handleKeyUp(event) {
       if (event.keyCode === 40) {
-        window.isBDown = false;
+        window.isDDown = false;
+      } else if (event.keyCode === 38) {
+        window.isUDown = false;
+      } else if (event.keyCode === 37) {
+        window.isLDown = false;
+      } else if (event.keyCode === 39) {
+        window.isRDown = false;
       }
     }
-
+   
     window.addEventListener("keydown", handleKeyDown, false);
     window.addEventListener("keyup", handleKeyUp, false);
 
@@ -43,8 +60,14 @@ class App extends Component {
       requestAnimationFrame(animate);
 
       //  requestAnimationFrame(animate);
-  if (window.isBDown) {
+  if (window.isDDown) {
     cube.rotation.x += 0.01;
+  } else if (window.isUDown) {
+    cube.rotation.x -= 0.01;
+  } else if (window.isLDown) {
+    cube.rotation.y -= 0.01;
+  } else if (window.isRDown) {
+    cube.rotation.y += 0.01;
   }
 
       renderer.render(scene, camera);
